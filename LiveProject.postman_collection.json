@@ -1,0 +1,579 @@
+{
+	"info": {
+		"_postman_id": "eb42929e-6ae4-4c30-a87b-b5fc7ed8849a",
+		"name": "LiveProject",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "View",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(pm.response.code != 200) {\r",
+							"    postman.setNextRequest(null);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/html",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": "_hjSessionUser_725912=eyJpZCI6Ijc1M2YzYjljLWFiNDEtNTM2Yi1iZjBhLTM1YjEzOTA4ZmE4MCIsImNyZWF0ZWQiOjE2NDk3NzU5ODE2NjAsImV4aXN0aW5nIjp0cnVlfQ==; user_staging={\"id\":100076,\"first_name\":\"grace\",\"last_name\":\"lopez\",\"email\":\"grace.lopez@gmail.com\",\"nda_signed\":false,\"source\":\"studio\",\"phone_number\":\"+591-77777777\",\"signup_stage\":null,\"utm_source\":null,\"utm_campaign\":null,\"utm_medium\":null,\"pm_dashboard_token\":null,\"user_type\":\"User\",\"origin\":\"staging\",\"address_disabled\":false,\"organisation\":null,\"billing_entity\":null,\"bant_answers\":\"What best describes you?,Student,Size of your company?,1,When do you need your software delivered?,Not sure,How much do you expect to spend?,[object Object],Which app category would it fit into?,Business & finance\",\"spec_call_nda_signed\":null,\"enterprise_lead\":null,\"user_profiles\":[],\"authtoken\":\"JhzkB41vsf_tbs4T1H17\",\"currency\":{\"id\":2,\"name\":\"US Dollars\",\"code\":\"USD\",\"exchange_rate\":1,\"multiplier\":1,\"symbol\":\"$\",\"country_code\":\"US\",\"default_store_promo_code\":\"freewebusd\",\"specing_price\":250,\"icon_image_file_url\":\"https://bstudio-staging.azureedge.net/alpha-stg-assets/uploads/image/file/591a9aa814c49f7f467463f7/Dollar.svg\",\"instant_spec_price\":250,\"tax\":0,\"custom_prototype_price\":1999,\"post_upfront_price\":500,\"tax_type\":null},\"roles\":\"\",\"available_currency\":[\"USD\"],\"setting\":{\"avatar_details\":{\"color_codes\":{\"background\":\"#FF8A80\",\"chat_handle\":\"#FF5252\"},\"initials\":\"GL\"}},\"frontend_url\":\"https://staging.engineer.ai\"}; _session_id=a0x4a2pqSFBPcDAzQUUzZGJsRndDRFI0Q2N6MG5Dem8vc3lFdE1oTzIwaUJXNGljcFpqMTlHZmJ3SFFiTnY4OFBZK3RUMUZyYitQMWxsV21iRjBxSmdiYjA0R0x6aFhPUW1TS1lxM0JJOXc0Y0svUzRXUm1KQlFDd0c0OVdpVDAyMDBJU0VYY2N0Ym9qdVhIUStoeGRZZGMvRHVMcHdJWW9BSmpjTThYbmlwTEhOK0ZvYWlqckRTMEgwRzd4enhHLS1ieW5pT2NQVEVYRnhmNC9MTWJWMm5RPT0=--37925e9e7c304baa2512d9a4fbfdc0609759214e; _engineerai_session=ZXhuTTkxc0V3NHJieitLbzNhbmc3WkhtUkpPcG1uakVyU2p3dmlleTZ0Z1lIdy9Cbk9aUi82R2RyY1MzaG95U2Jia0RtMFowTGY5c0o5NnRla2dRY3k4RGlYa1NJbmQySENrUFZiYmhQS29XQ29uYjRFeUhpNGErN2VpUVVnbW0vMmg4cnI1Y1daMkkvVmdHdWhmeTN2ZTRFeEU0Y090TTk5UEJIMjFKODdXdEVKaDdSdzNLbnNPUmY4alpjVzdtLS1DTHd6bFBGUFBhMlFkZVFGRVNFdnZRPT0=--0d4a313b6ebf7f3c77cfd9c404c30a40a8537667",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "api-staging-builder.engineer.ai",
+						"value": "api-staging-builder.engineer.ai",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{baseUrl}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RegisterUser",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var schema = pm.collectionVariables.get(\"registerSchema\");\r",
+							"\r",
+							"pm.test('Schema is valid', function() {\r",
+							"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"var requestJson = pm.request.body;\r",
+							"var requestJsonData;\r",
+							"console.log(\"request body is \" + requestJson);\r",
+							"\r",
+							"for(let key in requestJson) {\r",
+							"    if(key==\"raw\") {\r",
+							"        requestJsonData = JSON.parse(requestJson[key]);\r",
+							"    }\r",
+							"}\r",
+							"console.log(requestJsonData);\r",
+							"pm.collectionVariables.set(\"email\", requestJsonData.user.email.toLowerCase());\r",
+							"pm.collectionVariables.set(\"password\", requestJsonData.user.password);\r",
+							"pm.collectionVariables.set(\"token\", pm.response.json().user.authtoken);\r",
+							"\r",
+							"pm.test(\"Verify that user is registered successfully and request and response json data matches correctly\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Signed up successfully\");\r",
+							"    pm.expect(jsonData.user.email.toLowerCase).to.eql(pm.collectionVariables.get(\"email\").toLowerCase);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Referer",
+						"value": "https://staging.engineer.ai/",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "authtoken",
+						"value": "{{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": {\r\n        \"first_name\": \"{{$randomFirstName}}\",\r\n        \"last_name\": \"{{$randomLastName}}\",\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"password\": \"{{$randomPassword}}\",\r\n        \"phone_number\": \"+591-{{$randomPhoneNumberExt}}\",\r\n        \"user_type\": \"User\",\r\n        \"organisation\": \"{{$randomCompanyName}}\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var schema = pm.collectionVariables.get(\"loginSchema\");\r",
+							"pm.collectionVariables.set(\"authtoken\", pm.response.json().user.authtoken);\r",
+							"\r",
+							"pm.test(\"Schema is valid\", function() {\r",
+							"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;    \r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify that user email is correct in login response\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Signed in successfully\");\r",
+							"    pm.expect(jsonData.user.email.toLowerCase).to.eql(pm.collectionVariables.get(\"email\").toLowerCase);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Referer",
+						"value": "https://staging.engineer.ai/home",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "authtoken",
+						"value": "{{token}}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users/sign_in",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"sign_in"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "LoginAPI",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Referer",
+								"value": "https://staging.engineer.ai/",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{username}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users/sign_in",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"users",
+								"sign_in"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.17.10"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 12 Apr 2022 20:48:54 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept, Origin"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "strict-origin-when-cross-origin"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "_session_id=cmJ3ejJFRktRN255anB3SWg0YjgzaXlJUzVHdFlBeDdkNjc0T1RCTUhuSmNyc0VMVlB0cGpUUTRyYnNIdWRsYzdKVjQwNGFCQ0pEbE96ZmQycXJWdUE9PS0ta29OOEJldEswMHdDdkhkandoS2VqZz09--1f9e5e91a1bd2c945723d065a9e2d1e83200d478; path=/; HttpOnly"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "_session_id=cmJ3ejJFRktRN255anB3SWg0YjgzaXlJUzVHdFlBeDdkNjc0T1RCTUhuSmNyc0VMVlB0cGpUUTRyYnNIdWRsYzdKVjQwNGFCQ0pEbE96ZmQycXJWdUE9PS0ta29OOEJldEswMHdDdkhkandoS2VqZz09--1f9e5e91a1bd2c945723d065a9e2d1e83200d478; path=/; HttpOnly"
+						},
+						{
+							"key": "Set-Cookie",
+							"value": "_engineerai_session=czF2clg5c2dFZElEdEdJbGl2Vm8wS0pqNm1ncUNacUhIaXRuNEEzRXh5WjNqWjJURU5Pb2JBSTNFS09qLzVZUGoxRkJyVnhBb3gzTk1RdjExYWNaT0E9PS0tdXd1ZHlMVUIrR0NPc2N3QnBPZEpzZz09--5ec94d6f99cca4d132a559677b68f64de4cce315; path=/; HttpOnly"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"202ff6759afdd107d3b565893d5c6e53\""
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=0, private, must-revalidate"
+						},
+						{
+							"key": "X-Request-Id",
+							"value": "4fa9a59c5948dffdbec73b009f57dbae"
+						},
+						{
+							"key": "X-Runtime",
+							"value": "0.386807"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"user\": {\n        \"id\": 100076,\n        \"first_name\": \"grace\",\n        \"last_name\": \"lopez\",\n        \"email\": \"grace.lopez@gmail.com\",\n        \"nda_signed\": false,\n        \"source\": \"studio\",\n        \"phone_number\": \"+591-77777777\",\n        \"signup_stage\": null,\n        \"utm_source\": null,\n        \"utm_campaign\": null,\n        \"utm_medium\": null,\n        \"pm_dashboard_token\": null,\n        \"user_type\": \"User\",\n        \"origin\": \"staging\",\n        \"address_disabled\": false,\n        \"organisation\": null,\n        \"billing_entity\": null,\n        \"bant_answers\": [\n            [\n                \"What best describes you?\",\n                \"Student\"\n            ],\n            [\n                \"Size of your company?\",\n                \"1\"\n            ],\n            [\n                \"When do you need your software delivered?\",\n                \"Not sure\"\n            ],\n            [\n                \"How much do you expect to spend?\",\n                {\n                    \"key\": \"Less than $5,000\",\n                    \"value\": \"$5,000\"\n                }\n            ],\n            [\n                \"Which app category would it fit into?\",\n                \"Business & finance\"\n            ]\n        ],\n        \"spec_call_nda_signed\": null,\n        \"enterprise_lead\": null,\n        \"profile_image\": null,\n        \"user_profiles\": [],\n        \"authtoken\": \"xKaTAmuUu2fBkv8Fd8VC\",\n        \"currency\": {\n            \"data\": {\n                \"id\": \"2\",\n                \"type\": \"currency\",\n                \"attributes\": {\n                    \"id\": 2,\n                    \"name\": \"US Dollars\",\n                    \"code\": \"USD\",\n                    \"exchange_rate\": 1,\n                    \"multiplier\": 1,\n                    \"symbol\": \"$\",\n                    \"country_code\": \"US\",\n                    \"default_store_promo_code\": \"freewebusd\",\n                    \"specing_price\": 250,\n                    \"icon_image_file_url\": \"https://bstudio-staging.azureedge.net/alpha-stg-assets/uploads/image/file/591a9aa814c49f7f467463f7/Dollar.svg\",\n                    \"instant_spec_price\": 250,\n                    \"tax\": 0,\n                    \"custom_prototype_price\": 1999,\n                    \"post_upfront_price\": 500,\n                    \"tax_type\": null\n                }\n            }\n        },\n        \"roles\": \"\",\n        \"setting\": {\n            \"avatar_details\": {\n                \"color_codes\": {\n                    \"background\": \"#FF8A80\",\n                    \"chat_handle\": \"#FF5252\"\n                },\n                \"initials\": \"GL\"\n            }\n        }\n    },\n    \"message\": \"Signed in successfully\"\n}"
+				}
+			]
+		},
+		{
+			"name": "SetCurrency",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var schema = pm.collectionVariables.get(\"registerSchema\");\r",
+							"\r",
+							"pm.test('Schema is valid', function() {\r",
+							"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify that user is registered successfully and request and response json data matches correctly\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Updated successfully\");\r",
+							"    pm.expect(jsonData.user.email.toLowerCase).to.eql(pm.collectionVariables.get(\"email\").toLowerCase);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Referer",
+						"value": "https://staging.engineer.ai/",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "authtoken",
+						"value": "{{token}}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"type": "text"
+					},
+					{
+						"warning": "This is a duplicate header and will be overridden by the Content-Type header generated by Postman.",
+						"key": "Content-Type",
+						"value": "multipart/form-data",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user[currency_id]",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/users",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify logout is successful\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.eql(\"Logged out successfully\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/html",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+						"type": "text"
+					},
+					{
+						"key": "Cookie",
+						"value": "_hjSessionUser_725912=eyJpZCI6Ijc1M2YzYjljLWFiNDEtNTM2Yi1iZjBhLTM1YjEzOTA4ZmE4MCIsImNyZWF0ZWQiOjE2NDk3NzU5ODE2NjAsImV4aXN0aW5nIjp0cnVlfQ==; user_staging={\"id\":100076,\"first_name\":\"grace\",\"last_name\":\"lopez\",\"email\":\"grace.lopez@gmail.com\",\"nda_signed\":false,\"source\":\"studio\",\"phone_number\":\"+591-77777777\",\"signup_stage\":null,\"utm_source\":null,\"utm_campaign\":null,\"utm_medium\":null,\"pm_dashboard_token\":null,\"user_type\":\"User\",\"origin\":\"staging\",\"address_disabled\":false,\"organisation\":null,\"billing_entity\":null,\"bant_answers\":\"What best describes you?,Student,Size of your company?,1,When do you need your software delivered?,Not sure,How much do you expect to spend?,[object Object],Which app category would it fit into?,Business & finance\",\"spec_call_nda_signed\":null,\"enterprise_lead\":null,\"user_profiles\":[],\"authtoken\":\"JhzkB41vsf_tbs4T1H17\",\"currency\":{\"id\":2,\"name\":\"US Dollars\",\"code\":\"USD\",\"exchange_rate\":1,\"multiplier\":1,\"symbol\":\"$\",\"country_code\":\"US\",\"default_store_promo_code\":\"freewebusd\",\"specing_price\":250,\"icon_image_file_url\":\"https://bstudio-staging.azureedge.net/alpha-stg-assets/uploads/image/file/591a9aa814c49f7f467463f7/Dollar.svg\",\"instant_spec_price\":250,\"tax\":0,\"custom_prototype_price\":1999,\"post_upfront_price\":500,\"tax_type\":null},\"roles\":\"\",\"available_currency\":[\"USD\"],\"setting\":{\"avatar_details\":{\"color_codes\":{\"background\":\"#FF8A80\",\"chat_handle\":\"#FF5252\"},\"initials\":\"GL\"}},\"frontend_url\":\"https://staging.engineer.ai\"}; _session_id=a0x4a2pqSFBPcDAzQUUzZGJsRndDRFI0Q2N6MG5Dem8vc3lFdE1oTzIwaUJXNGljcFpqMTlHZmJ3SFFiTnY4OFBZK3RUMUZyYitQMWxsV21iRjBxSmdiYjA0R0x6aFhPUW1TS1lxM0JJOXc0Y0svUzRXUm1KQlFDd0c0OVdpVDAyMDBJU0VYY2N0Ym9qdVhIUStoeGRZZGMvRHVMcHdJWW9BSmpjTThYbmlwTEhOK0ZvYWlqckRTMEgwRzd4enhHLS1ieW5pT2NQVEVYRnhmNC9MTWJWMm5RPT0=--37925e9e7c304baa2512d9a4fbfdc0609759214e; _engineerai_session=ZXhuTTkxc0V3NHJieitLbzNhbmc3WkhtUkpPcG1uakVyU2p3dmlleTZ0Z1lIdy9Cbk9aUi82R2RyY1MzaG95U2Jia0RtMFowTGY5c0o5NnRla2dRY3k4RGlYa1NJbmQySENrUFZiYmhQS29XQ29uYjRFeUhpNGErN2VpUVVnbW0vMmg4cnI1Y1daMkkvVmdHdWhmeTN2ZTRFeEU0Y090TTk5UEJIMjFKODdXdEVKaDdSdzNLbnNPUmY4alpjVzdtLS1DTHd6bFBGUFBhMlFkZVFGRVNFdnZRPT0=--0d4a313b6ebf7f3c77cfd9c404c30a40a8537667",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "api-staging-builder.engineer.ai",
+						"value": "api-staging-builder.engineer.ai",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/users/sign_out?authtoken={{authtoken}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"users",
+						"sign_out"
+					],
+					"query": [
+						{
+							"key": "authtoken",
+							"value": "{{authtoken}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.headers.add('application/json',  'Content-Type');",
+					"pm.request.headers.add('json', 'Accept');",
+					"pm.request.headers.add(pm.collectionVariables.get(\"token\"), 'authtoken');",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Response time is less than 10000ms\", function() {",
+					"    pm.expect(pm.response.responseTime).to.be.below(10000);",
+					"});",
+					"",
+					"pm.test(\"Status code is 2xx\", () => {",
+					"  pm.expect(pm.response.code).oneOf([200,201]);",
+					"});",
+					"",
+					"pm.test(\"server response header is present\", function() {",
+					"    pm.response.to.have.header('Server', 'nginx/1.17.10');",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "buildcard",
+			"value": "454",
+			"type": "string"
+		},
+		{
+			"key": "colvar1",
+			"value": ""
+		},
+		{
+			"key": "registerSchema",
+			"value": "{\n  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"user\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"id\": {\n          \"type\": \"integer\"\n        },\n        \"first_name\": {\n          \"type\": \"string\"\n        },\n        \"last_name\": {\n          \"type\": \"string\"\n        },\n        \"email\": {\n          \"type\": \"string\"\n        },\n        \"nda_signed\": {\n          \"type\": \"boolean\"\n        },\n        \"source\": {\n          \"type\": \"string\"\n        },\n        \"phone_number\": {\n          \"type\": \"string\"\n        },\n        \"signup_stage\": {\n          \"type\": \"null\"\n        },\n        \"utm_source\": {\n          \"type\": \"null\"\n        },\n        \"utm_campaign\": {\n          \"type\": \"null\"\n        },\n        \"utm_medium\": {\n          \"type\": \"null\"\n        },\n        \"pm_dashboard_token\": {\n          \"type\": \"null\"\n        },\n        \"user_type\": {\n          \"type\": \"string\"\n        },\n        \"origin\": {\n          \"type\": \"string\"\n        },\n        \"address_disabled\": {\n          \"type\": \"boolean\"\n        },\n        \"organisation\": {\n          \"type\": \"string\"\n        },\n        \"billing_entity\": {\n          \"type\": \"null\"\n        },\n        \"bant_answers\": {\n          \"type\": \"null\"\n        },\n        \"spec_call_nda_signed\": {\n          \"type\": \"null\"\n        },\n        \"enterprise_lead\": {\n          \"type\": \"null\"\n        },\n        \"profile_image\": {\n          \"type\": \"null\"\n        },\n        \"user_profiles\": {\n          \"type\": \"array\",\n          \"items\": {}\n        },\n        \"authtoken\": {\n          \"type\": \"string\"\n        },\n        \"currency\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"data\": {\n              \"type\": \"null\"\n            }\n          },\n          \"required\": [\n            \"data\"\n          ]\n        },\n        \"roles\": {\n          \"type\": \"string\"\n        },\n        \"setting\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"avatar_details\": {\n              \"type\": \"object\",\n              \"properties\": {\n                \"color_codes\": {\n                  \"type\": \"object\",\n                  \"properties\": {\n                    \"background\": {\n                      \"type\": \"string\"\n                    },\n                    \"chat_handle\": {\n                      \"type\": \"string\"\n                    }\n                  },\n                  \"required\": [\n                    \"background\",\n                    \"chat_handle\"\n                  ]\n                },\n                \"initials\": {\n                  \"type\": \"string\"\n                }\n              },\n              \"required\": [\n                \"color_codes\",\n                \"initials\"\n              ]\n            }\n          },\n          \"required\": [\n            \"avatar_details\"\n          ]\n        }\n      },\n      \"required\": [\n        \"id\",\n        \"first_name\",\n        \"last_name\",\n        \"email\",\n        \"nda_signed\",\n        \"source\",\n        \"phone_number\",\n        \"signup_stage\",\n        \"utm_source\",\n        \"utm_campaign\",\n        \"utm_medium\",\n        \"pm_dashboard_token\",\n        \"user_type\",\n        \"origin\",\n        \"address_disabled\",\n        \"organisation\",\n        \"billing_entity\",\n        \"bant_answers\",\n        \"spec_call_nda_signed\",\n        \"enterprise_lead\",\n        \"profile_image\",\n        \"user_profiles\",\n        \"authtoken\",\n        \"currency\",\n        \"roles\",\n        \"setting\"\n      ]\n    },\n    \"message\": {\n      \"type\": \"string\"\n    }\n  },\n  \"required\": [\n    \"user\",\n    \"message\"\n  ]\n}",
+			"type": "string"
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"value": ""
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "buildCardSchema",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "loginSchema",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "authtoken",
+			"value": ""
+		}
+	]
+}
